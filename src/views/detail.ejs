@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+    <script>
+function toggleEditForm(commentId, existingComment) {
+    const editForm = document.getElementById(`edit-form-${commentId}`);
+    
+    if (editForm.style.display === "none" || editForm.style.display === "") {
+      editForm.style.display = "block"; // 수정 폼 표시
+    } else {
+      editForm.style.display = "none"; // 수정 폼 숨기기
+    }
+  }
+    </script>
+</head>
+<body>
+<h1>Express + EJS 를 사용한 게시판 - 글 보기</h1>
+<div>
+    <h2>
+        제목: <%= post.title %>
+    </h2>
+    <p>
+        내용: <%= post.content %>
+    </p>
+
+
+    <div>
+        <form action="/<%= post._id %>/comments" method="post">
+            <input type="text" name="comment" placeholder="댓글을 입력하세요">
+            <button type="submit">등록</button>
+        </form>
+    
+        <h4>댓글들</h4>
+        <div >
+        <% comments.forEach(function(comment) { %>
+           
+            <div style="width: 100%; display: flex; gap: 10px;">
+              <span><%= comment.comment %></span> <!-- 댓글 내용을 출력 -->
+              <button onclick="toggleEditForm('<%= comment._id %>', '<%= comment.comment %>')">수정 시작</button>
+              
+              <div id="edit-form-<%= comment._id %>" style="display: none;">
+                <form action="/<%= post._id %>/comments/<%= comment._id %>" method="post">
+                  <input type="text" name="comment" value="<%= comment.comment %>" required>
+                  <button type="submit">수정</button>
+                  <button type="button" onclick="toggleEditForm('<%= comment._id %>')">취소</button>
+                </form>
+            </div>
+            <form action="/<%= post._id %>/comments/<%= comment._id %>/delete" method="post">
+                <button type="submit">삭제</button>
+              </form>
+        </div>
+        <% }); %>
+  
+</div>
+
+    <form action="/posts-delete" method="post">
+        <input type="hidden" name="postId" value=<%=post._id%>>
+        <button type="submit">삭제</button>
+    </form>
+    <form action=<%= `/update/${post._id}`%>>
+        <button type="submit">수정</button>
+    </form>
+    <a href="/">이전으로</a>
+</div>
+</body>
+</html>
