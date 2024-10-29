@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>게시판</title>
+    <style>
+      .login-section {
+        border: 1px solid #d6d6d6;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 12px;
+        border-radius: 8px;
+      }
+
+      .login-section-title {
+        font-weight: 600;
+        text-align: center;
+        font-size: 32px;
+        margin: 0;
+        padding: 0;
+      }
+
+      .login-section input {
+        padding: 8px;
+        outline: none;
+        border-radius: 8px;
+        border: 1px solid #c563d9;
+      }
+
+      .input-box {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 4px 0;
+
+        > span {
+          color: #2e2e2e;
+          letter-spacing: -0.3px;
+
+          &:after {
+            content: "*";
+            color: red;
+          }
+        }
+      }
+
+      .signup-btn {
+        padding: 10px 16px;
+        color: white;
+        background-color: #c563d9;
+        width: 100%;
+        margin-top: 12px;
+        cursor: pointer;
+        border: 1px solid #c563d9;
+        border-radius: 8px;
+      }
+
+      .login-link {
+        margin-top: 12px;
+        display: block;
+        text-align: right;
+        font-size: 13px;
+        color: #2e2e2e;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 style="display: flex; justify-content: center; margin-top: 100px">
+        Express + EJS 를 사용한 게시판 - 회원가입
+      </h1>
+    </header>
+    <main>
+      <section class="login-section">
+        <p class="login-section-title">게시판 Signup</p>
+        <form action="/signup" method="post">
+          <div class="input-box">
+            <span>ID</span>
+            <input type="text" name="id" placeholder="Enter ID" required />
+          </div>
+          <div class="input-box">
+            <span>Password</span>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+          <div class="input-box">
+            <span>Password Confirm</span>
+            <input
+              type="password"
+              name="passwordConfirm"
+              placeholder="Enter Password Confirm"
+              required
+            />
+          </div>
+          <div class="input-box">
+            <span>Name</span>
+            <input type="text" name="name" placeholder="Enter Name" required />
+          </div>
+          <button type="submit" class="signup-btn">가입하기</button>
+        </form>
+        <a class="login-link" href="/login" style="text-align: center"
+          >로그인</a
+        >
+      </section>
+    </main>
+  </body>
+</html>
